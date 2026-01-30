@@ -1,67 +1,50 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>内嵌百度页面</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        iframe {
-            width: 100%;
-            height: 600px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>index</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    iframe {
+      border: none;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>内嵌百度搜索页面</h1>
-        <iframe 
-            src="https://chkjnotary.com" 
-            frameborder="0"
-            allowfullscreen
-            title="百度搜索">
-        </iframe>
-        <p style="text-align: center; color: #666; margin-top: 10px;">
-            以上内嵌的是百度首页，您可以直接在此进行搜索
-        </p>
-    </div>
-    <script>
-        // WARNING: For GET requests, body is set to null by browsers.
+  <iframe 
+    src="https://chkjnotary.com" 
+    frameborder="0"
+    allowfullscreen
+    title="index">
+  </iframe>
 
-        var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
+  <script>
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
 
-        xhr.addEventListener("readystatechange", function() {
-          if(this.readyState === 4) {
-            console.log('Status:', this.status);
-            console.log('Response:', this.responseText);
-            if (this.status === 200) {
-              console.log('成功响应:', this.responseText);
-            } else {
-              console.log('请求失败，状态码:', this.status);
-            }
-          }
-        });
+    xhr.addEventListener("readystatechange", function() {
+      if (this.readyState === 4) {
+        console.log('Status:', this.status);
+        if (this.status === 200) {
+          console.log('成功响应:', this.responseText);
+        } else {
+          console.log('请求失败，状态码:', this.status);
+        }
+      }
+    });
 
-        xhr.open("GET", "https://static.json.cn/r/json/search_list.json");
-
-        xhr.send();
-    </script>
+    xhr.open("GET", "https://static.json.cn/r/json/search_list.json");
+    xhr.send();
+  </script>
 </body>
 </html>
