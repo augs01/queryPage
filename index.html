@@ -43,21 +43,22 @@
     </div>
     <script>
         // 使用现代的fetch API（HTML5）发送GET请求
+        // 注意：这是一个跨域请求，需要服务器支持CORS，否则会失败
         fetch('https://nprapi.chkjnotary.com/health', {
             method: 'GET',
             credentials: 'include'  // 相当于withCredentials: true
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error('Network response was not ok: ' + response.status);
             }
             return response.text();
         })
         .then(data => {
-            console.log(data);
+            console.log('API响应:', data);
         })
         .catch(error => {
-            console.error('Fetch error:', error);
+            console.error('Fetch error (可能因跨域导致):', error);
         });
     </script>
 </body>
