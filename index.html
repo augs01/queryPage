@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>index</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     html, body {
       margin: 0;
@@ -29,22 +30,20 @@
   </iframe>
 
   <script>
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-
-    xhr.addEventListener("readystatechange", function() {
-      if (this.readyState === 4) {
-        console.log('Status:', this.status);
-        if (this.status === 200) {
-          console.log('成功响应:', this.responseText);
-        } else {
-          console.log('请求失败，状态码:', this.status);
-        }
+    $.ajax({
+      url: "https://nprapi.chkjnotary.com/api/Share/Share/ApplyBasics/3C20240320153212010/gx",
+      type: "GET",
+      crossDomain: true,
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function(data, textStatus, jqXHR) {
+        console.log('成功响应:', data);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log('请求失败:', textStatus, errorThrown);
       }
     });
-
-    xhr.open("GET", "https://nprapi.chkjnotary.com/api/Share/Share/ApplyBasics/3C20240320153212010/gx");
-    xhr.send();
   </script>
 </body>
 </html>
